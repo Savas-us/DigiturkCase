@@ -23,15 +23,16 @@ namespace DigiturkCase.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Article>> Get()
         {
-            return _articleDal.GetList();
+            return _articleDal.GetList(x=>x.IsActive);
         }
 
         // GET api/Article/5
         [HttpGet("{id}")]
         public ActionResult<Article> Get(Guid id)
         {
-            return _articleDal.GetT(x => x.ArticleId == id);
+            return _articleDal.GetT(x => x.ArticleId == id && x.IsActive);
         }
+
         // POST api/Article
         [HttpPost]
         public IActionResult Post([FromBody] Article value)
@@ -42,6 +43,7 @@ namespace DigiturkCase.Controllers
             }
             value.CreatedDate = DateTime.Now;
             _articleDal.Add(value);
+
             return Ok();
         }
 
@@ -62,12 +64,14 @@ namespace DigiturkCase.Controllers
             }
             else
             {
-                value.ModifiedDate = DateTime.Now;
-                _articleDal.Update(value);
+                article.ModifiedDate = DateTime.Now;
+                article.Title = value.Title;
+                article.Description = value.Description;
+                _articleDal.Update(article);
+
                 return Ok();
             }
         }
-
 
         // DELETE api/Article/5
         [HttpDelete("{id}")]
@@ -81,7 +85,9 @@ namespace DigiturkCase.Controllers
             var article = _articleDal.GetT(x => x.ArticleId == id);
             if (article != null)
             {
-                _articleDal.Delete(article);
+                article.IsActive = false;
+                _articleDal.Update(article);
+
                 return Ok();
             }
             else
