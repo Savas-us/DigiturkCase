@@ -13,7 +13,6 @@ namespace DigiturkCase.Controllers
     {
         public string Get()
         {
-
             return "saddas";
         }
     }

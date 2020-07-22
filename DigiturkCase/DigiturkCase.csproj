@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Dal\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
