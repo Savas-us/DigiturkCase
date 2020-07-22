@@ -40,8 +40,54 @@ namespace DigiturkCase.Controllers
             {
                 return BadRequest();
             }
+            value.CreatedDate = DateTime.Now;
             _articleDal.Add(value);
             return Ok();
+        }
+
+        // PUT api/Article/5
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, [FromBody] Article value)
+        {
+            if (value == null)
+            {
+                return BadRequest();
+            }
+
+            var article = _articleDal.GetT(x=>x.ArticleId == id);
+
+            if (article == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                value.ModifiedDate = DateTime.Now;
+                _articleDal.Update(value);
+                return Ok();
+            }
+        }
+
+
+        // DELETE api/Article/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var article = _articleDal.GetT(x => x.ArticleId == id);
+            if (article != null)
+            {
+                _articleDal.Delete(article);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
