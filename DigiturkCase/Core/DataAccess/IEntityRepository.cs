@@ -11,8 +11,8 @@ namespace DigiturkCase.Core.DataAccess
     {
         T GetT(Expression<Func<T, bool>> filter = null);
         List<T> GetList(Expression<Func<T, bool>> filter = null);
-        T Add(T entity);
-        T Update(T entity);
+        void Add(T entity);
+        void Update(T entity);
         void Delete(T entity);
     }
 }
