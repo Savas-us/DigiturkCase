@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DigiturkCase.Dal.Abstract;
 using DigiturkCase.Entities;
 using Microsoft.AspNetCore.Http;
@@ -14,14 +15,16 @@ namespace DigiturkCase.Controllers
     public class ArticleController : ControllerBase
     {
         private readonly IArticleDal _articleDal;
-        public ArticleController(IArticleDal articleDal)
+        private readonly IMapper _mapper;
+        public ArticleController(IArticleDal articleDal,IMapper mapper)
         {
             _articleDal = articleDal;
+            _mapper = mapper;
         }
 
         // GET api/Article
         [HttpGet]
-        public ActionResult<IEnumerable<Article>> Get()
+        public IEnumerable<Article> Get()
         {
             return _articleDal.GetList(x=>x.IsActive);
         }

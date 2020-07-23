@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DigiturkCase.Dal.Abstract;
 using DigiturkCase.Dal.Concrate.EntityFramework;
+using DigiturkCase.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +31,7 @@ namespace DigiturkCase
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IArticleDal, EfArticleDal>();
+            services.AddAutoMapper(typeof(AutoMapperHelper));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
