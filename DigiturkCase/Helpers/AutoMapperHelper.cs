@@ -13,6 +13,7 @@ namespace DigiturkCase.Helpers
         public AutoMapperHelper()
         {
             CreateMap<Article, ArticleModel>();
+            CreateMap<ArticleModel, Article>();
         }
     }
 }
