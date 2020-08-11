@@ -1,4 +1,4 @@
-# DigiturkCase API
+# Article API
 ---
 ### 1-Projede kullandığınız tasarım desenleri hangileridir? Bu desenleri neden kullandınız?
 ##### *Repository Pattern: 
